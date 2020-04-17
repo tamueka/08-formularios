@@ -7,17 +7,18 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./templates.component.css'],
 })
 export class TemplatesComponent implements OnInit {
-
-  usuario = ({
-    nombre: ''
-  })
+  usuario = {
+    nombre: 'Samuel',
+    apellido: 'Ruiz De la Rosa',
+    correo: 'tamueka@hotmail.com',
+  };
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  guardar(formulario: NgForm){
-    console.log(formulario)
-    console.log(formulario.value)
+  guardar(formulario: NgForm) {
+    console.log(formulario);
+    console.log(formulario.value);
   }
 }
