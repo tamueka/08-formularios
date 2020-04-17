@@ -13,19 +13,28 @@ export class TemplatesComponent implements OnInit {
     nombre: 'Samuel',
     apellido: 'Ruiz de la Rosa',
     correo: 'tamueka@hotmail.com',
+    pais: ''
   };
+
+  paises: any[] = [];
 
   constructor(private paisService: PaisService) {}
 
   ngOnInit(): void {
 
-    this.paisService.getPaises().subscribe( paises => {
-      console.log(paises)
-    })
+    this.paisService.getPaises()
+    .subscribe( paises => {
+      this.paises = paises;
 
+      this.paises.unshift({
+        nombre: '[ Seleccione pais ]',
+        codigo: ''
+      })
+    })
   }
 
   guardar(formulario: NgForm) {
+    console.log(formulario)
 
     if (formulario.invalid){
 
@@ -35,5 +44,6 @@ export class TemplatesComponent implements OnInit {
 
       return;
     }
+    console.log(formulario.value);
   }
 }
