@@ -1,15 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-templates',
   templateUrl: './templates.component.html',
-  styleUrls: ['./templates.component.css']
+  styleUrls: ['./templates.component.css'],
 })
 export class TemplatesComponent implements OnInit {
 
-  constructor() { }
+  usuario = ({
+    nombre: 'Sam'
+  })
 
-  ngOnInit(): void {
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  guardar(formulario: NgForm){
+    console.log(formulario)
+    console.log(formulario.value)
   }
-
 }
