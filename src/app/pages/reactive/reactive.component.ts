@@ -45,6 +45,13 @@ export class ReactiveComponent implements OnInit {
     );
   }
 
+  get usuarioNoValido(){
+    return (
+      this.formulario.get('usuario').invalid &&
+      this.formulario.get('usuario').touched
+    );
+  }
+
   get distritoNoValido() {
     return (
       this.formulario.get('direccion.distrito').invalid &&
@@ -70,30 +77,36 @@ export class ReactiveComponent implements OnInit {
     const contrasena1 = this.formulario.get('contrasena1').value;
     const contrasena2 = this.formulario.get('contrasena2').value;
 
-    return ( contrasena1 === contrasena2) ? false : true;
+    return contrasena1 === contrasena2 ? false : true;
   }
 
   crearFormulario() {
-    this.formulario = this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(5)]],
-      apellido: ['', [Validators.required, this.validadores.noHerrerra]],
-      correo: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
+    this.formulario = this.fb.group(
+      {
+        nombre: ['', [Validators.required, Validators.minLength(5)]],
+        apellido: ['', [Validators.required, this.validadores.noHerrerra]],
+        correo: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
+          ],
         ],
-      ],
-      contrasena1: ['', Validators.required],
-      contrasena2: ['', Validators.required],
-      direccion: this.fb.group({
-        distrito: ['', Validators.required],
-        ciudad: ['', Validators.required],
-      }),
-      pasatiempos: this.fb.array([]),
-    },{
-      validators: this.validadores.contrasenasIguales('contrasena1', 'contrasena2')
-    }
+        usuario: ['', , this.validadores.existeUsuario],
+        contrasena1: ['', Validators.required],
+        contrasena2: ['', Validators.required],
+        direccion: this.fb.group({
+          distrito: ['', Validators.required],
+          ciudad: ['', Validators.required],
+        }),
+        pasatiempos: this.fb.array([]),
+      },
+      {
+        validators: this.validadores.contrasenasIguales(
+          'contrasena1',
+          'contrasena2'
+        ),
+      }
     );
   }
 
@@ -103,6 +116,7 @@ export class ReactiveComponent implements OnInit {
       nombre: 'Juano',
       apellido: 'Perez',
       correo: 'juan@gmail.com',
+      usuario: 'tamueka',
       direccion: {
         distrito: 'Ontario',
         ciudad: 'Okinawa',
