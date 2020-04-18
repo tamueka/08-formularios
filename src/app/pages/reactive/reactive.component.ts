@@ -16,6 +16,7 @@ export class ReactiveComponent implements OnInit {
   ) {
     this.crearFormulario();
     this.cargarDataAlFormulario();
+    this.crearListener();
   }
 
   ngOnInit(): void {}
@@ -45,7 +46,7 @@ export class ReactiveComponent implements OnInit {
     );
   }
 
-  get usuarioNoValido(){
+  get usuarioNoValido() {
     return (
       this.formulario.get('usuario').invalid &&
       this.formulario.get('usuario').touched
@@ -108,6 +109,18 @@ export class ReactiveComponent implements OnInit {
         ),
       }
     );
+  }
+
+  crearListener(){
+/*     this.formulario.valueChanges.subscribe( valor => {
+      console.log(valor)
+    })
+
+    this.formulario.statusChanges.subscribe( status => {
+      console.log(status)
+    }) */
+
+    this.formulario.get('nombre').valueChanges.subscribe(console.log)
   }
 
   cargarDataAlFormulario() {
