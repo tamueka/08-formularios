@@ -16,7 +16,7 @@ export class ReactiveComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  get pasatiempos(){
+  get pasatiempos() {
     return this.formulario.get('pasatiempos') as FormArray;
   }
 
@@ -56,7 +56,6 @@ export class ReactiveComponent implements OnInit {
   }
 
   crearFormulario() {
-
     this.formulario = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(5)]],
       apellido: ['', [Validators.required, Validators.minLength(5)]],
@@ -71,14 +70,12 @@ export class ReactiveComponent implements OnInit {
         distrito: ['', Validators.required],
         ciudad: ['', Validators.required],
       }),
-      pasatiempos: this.fb.array([
-        [], [], [], [], []
-      ])
+      pasatiempos: this.fb.array([]),
     });
-
   }
 
   cargarDataAlFormulario() {
+    //this.formulario.setValue
     this.formulario.reset({
       nombre: 'Juano',
       apellido: 'Perez',
@@ -88,6 +85,14 @@ export class ReactiveComponent implements OnInit {
         ciudad: 'Okinawa',
       },
     });
+  }
+
+  agregarPasatiempo() {
+    this.pasatiempos.push(this.fb.control(''));
+  }
+
+  borrarPasatiempo(i: number){
+    this.pasatiempos.removeAt(i);
   }
 
   guardar() {
@@ -107,7 +112,7 @@ export class ReactiveComponent implements OnInit {
 
     //Posteo informacion
     this.formulario.reset({
-      nombre:'Samuel'
-    })
+      nombre: 'Samuel',
+    });
   }
 }
