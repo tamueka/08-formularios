@@ -10,8 +10,10 @@ import { ValidadoresService } from 'src/app/services/validadores.service';
 export class ReactiveComponent implements OnInit {
   formulario: FormGroup;
 
-  constructor(private fb: FormBuilder,
-              private validadores: ValidadoresService) {
+  constructor(
+    private fb: FormBuilder,
+    private validadores: ValidadoresService
+  ) {
     this.crearFormulario();
     this.cargarDataAlFormulario();
   }
@@ -57,6 +59,20 @@ export class ReactiveComponent implements OnInit {
     );
   }
 
+  get contrasena1NoValido() {
+    return (
+      this.formulario.get('contrasena1').invalid &&
+      this.formulario.get('contrasena1').touched
+    );
+  }
+
+  get contrasena2NoValido() {
+    const contrasena1 = this.formulario.get('contrasena1').value;
+    const contrasena2 = this.formulario.get('contrasena2').value;
+
+    return ( contrasena1 === contrasena2) ? false : true;
+  }
+
   crearFormulario() {
     this.formulario = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(5)]],
@@ -68,12 +84,17 @@ export class ReactiveComponent implements OnInit {
           Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
         ],
       ],
+      contrasena1: ['', Validators.required],
+      contrasena2: ['', Validators.required],
       direccion: this.fb.group({
         distrito: ['', Validators.required],
         ciudad: ['', Validators.required],
       }),
       pasatiempos: this.fb.array([]),
-    });
+    },{
+      validators: this.validadores.contrasenasIguales('contrasena1', 'contrasena2')
+    }
+    );
   }
 
   cargarDataAlFormulario() {
@@ -93,7 +114,7 @@ export class ReactiveComponent implements OnInit {
     this.pasatiempos.push(this.fb.control(''));
   }
 
-  borrarPasatiempo(i: number){
+  borrarPasatiempo(i: number) {
     this.pasatiempos.removeAt(i);
   }
 
