@@ -19,6 +19,18 @@ export class ReactiveComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get NombreNoValido(){
+    return this.formulario.get('nombre').invalid && this.formulario.get('nombre').touched;
+  }
+
+  get ApellidoNoValido(){
+    return this.formulario.get('apellido').invalid && this.formulario.get('apellido').touched;
+  }
+
+  get CorreoNoValido(){
+    return this.formulario.get('correo').invalid && this.formulario.get('correo').touched;
+  }
+
   crearFormulario(){
 
     this.formulario = this.fb.group({
@@ -34,7 +46,13 @@ export class ReactiveComponent implements OnInit {
   }
 
   guardar(){
-    console.log(this.formulario)
+    console.log( this.formulario )
+
+    if( this.formulario.invalid ){
+      return Object.values( this.formulario.controls ).forEach( control => {
+        control.markAsTouched();
+      });
+    }
   }
 
 }
