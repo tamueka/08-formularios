@@ -9,8 +9,8 @@
       <div class="col">
 
         <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre"
-          [class.is-invalid]="NombreNoValido">
-        <small *ngIf="NombreNoValido" class="invalid-feedback">Ingrese 5 letras</small>
+          [class.is-invalid]="nombreNoValido">
+        <small *ngIf="nombreNoValido" class="invalid-feedback">Ingrese 5 letras</small>
       </div>
     </div>
 
@@ -19,8 +19,8 @@
       <div class="col">
 
         <input class="form-control" type="text" placeholder="Apellido" formControlName="apellido"
-          [class.is-invalid]="ApellidoNoValido">
-        <small *ngIf="ApellidoNoValido" class="invalid-feedback">Ingrese 5 letras</small>
+          [class.is-invalid]="apellidoNoValido">
+        <small *ngIf="apellidoNoValido" class="invalid-feedback">Ingrese 5 letras</small>
       </div>
     </div>
 
@@ -31,8 +31,8 @@
     <div class="col">
 
       <input class="form-control" type="email" placeholder="Correo electrónico" formControlName="correo"
-        [class.is-invalid]="CorreoNoValido">
-      <small *ngIf="CorreoNoValido" class="invalid-feedback">Ingrese email válido</small>
+        [class.is-invalid]="correoNoValido">
+      <small *ngIf="correoNoValido" class="invalid-feedback">Ingrese email válido</small>
     </div>
   </div>
 
@@ -44,14 +44,19 @@
         <input  type="text"
                 class="form-control"
                 placeholder="Distrito"
-                formControlName="distrito">
+                formControlName="distrito"
+                [class.is-invalid]="distritoNoValido">
+        <small *ngIf="distritoNoValido" class="invalid-feedback">Ingrese distrito válido</small>
       </div>
 
       <div class="col">
         <input  type="text"
                 class="form-control"
                 placeholder="Ciudad"
-                formControlName="ciudad">
+                formControlName="ciudad"
+                [class.is-invalid]="ciudadNoValido">
+        <small *ngIf="distritoNoValido" class="invalid-feedback">Ingrese ciudad válida</small>
+
       </div>
     </div>
   </div>
