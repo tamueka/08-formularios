@@ -76,6 +76,7 @@
                     {{ pais.nombre }}
             </option>
           </select>
+          <small *ngIf="pais.invalid && pais.touched" class="invalid-feedback">Debe seleccionar un pais</small>
         </div>
       </div>
 
